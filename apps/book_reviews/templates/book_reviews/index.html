@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book Reviews</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'book_reviews/css/style.css' %}">
+</head>
+<body>
+	<div id="pagewrap">
+		<h1>Welcome!</h1>
+		<div class="col-1-2">
+			<form action="/register" method="POST">
+				{% csrf_token %}
+				<p class="title">Register</p>
+				<label for="name">Name:</label>
+				<input type="text" name="name">
+
+				<label for="alias">Alias:</label>
+				<input type="text" name="alias">
+
+				<label for="email">Email:</label>
+				<input type="text" name="email">
+
+				<label for="password">Password:</label>
+				<input type="password" name="password">
+				<span>*Password must be at least 8 characters long</span>
+
+				<label for="confirm_pw">Confirm PW:</label>
+				<input type="password" name="confirm_pw">
+
+				<input type="submit" value="Register" class="button">
+			</form>
+		</div>
+		<div class="col-1-2">
+			<form action="/login" method="POST">
+				{% csrf_token %}
+				<p class="title">Login</p>
+
+				<label for="email">Email:</label>
+				<input type="text" name="email">
+
+				<label for="password">Password:</label>
+				<input type="password" name="password">
+
+				<input type="submit" value="Login" class="button">
+			</form>
+		</div>
+	</div>
+</body>
+</html>
