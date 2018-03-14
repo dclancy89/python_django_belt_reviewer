@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book Reviews</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'book_reviews/css/style.css' %}">
+</head>
+<body>
+	<div id="pagewrap">
+		{% if messages %}
+			<ul class="messages">
+    		{% for message in messages %}
+    			<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    		{% endfor %}
+			</ul>
+		{% endif %}
+		<div class="header">
+			<h1>Welcome {{ user.alias }}</h1>
+			<a href="/books">Home</a>
+			<a href="/logout">Logout</a>
+		</div>
+
+		<form action="/books/add/save" method="POST">
+			{% csrf_token %}
+			<label for="title">Book Title:</label>
+			<input type="text" name="title">
+
+			<label>Author</label>
+			
+			{% if authors %}
+				<label for="author_dropdown">Choose from the list:</label>
+				<select name="author_dropdown">
+					{% for author in authors %}
+					<option value="{{ author.id }}">{{ author.author }}</option>
+					{% endfor %}
+				</select>
+			{% endif %}
+			<label for="add_author">Add a new author:</label>
+			<input type="text" name="add_author">
+
+			<label for="review">Review:</label>
+			<textarea name="review"></textarea>
+
+			<label for="rating">Rating</label>
+			<select name="rating">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select> stars.
+
+			<input type="submit" value="Add Book and Review">
+		</form>
+		
+	</div>
+</body>
+</html>

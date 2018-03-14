@@ -15,7 +15,7 @@ class UserManager(models.Manager):
 		if len(postData['name']) < 2 or not postData['name'].isalpha():
 			if len(postData['name']) < 2:
 				errors['name_length'] = "Name must be at least two characters."
-			if not postData['first_name'].isalpha():
+			if not postData['name'].isalpha():
 				errors['name_alpha'] = "Name can only contain letters."
 
 	
@@ -52,3 +52,48 @@ class User(models.Model):
 	updated_at = models.DateTimeField(auto_now = True)
 
 	objects = UserManager()
+
+class AuthorManager(models.Manager):
+	def validate_author(request, postData):
+		errors = {}
+		return errors
+
+class Author(models.Model):
+	author = models.CharField(max_length=255)
+
+	objects = AuthorManager()
+
+
+class BookManager(models.Manager):
+	def validate_book(request, postData):
+		errors = {}
+		return errors
+
+class Book(models.Model):
+	title = models.CharField(max_length=255)
+	author = models.ForeignKey(Author, related_name="books")
+	created_at = models.DateTimeField(auto_now_add = True)
+	updated_at = models.DateTimeField(auto_now = True)
+
+	objects = BookManager()
+
+class ReviewManager(models.Manager):
+	def validate_review(request, postData):
+		errors = {}
+		return errors
+
+class Review(models.Model):
+	rating = models.IntegerField()
+	review = models.TextField()
+	reviewer = models.ForeignKey(User, related_name="reviews")
+	book = models.ForeignKey(Book, related_name="reviews")
+	created_at = models.DateTimeField(auto_now_add = True)
+	updated_at = models.DateTimeField(auto_now = True)
+
+	objects = ReviewManager()
+
+
+
+
+
+

@@ -4,6 +4,18 @@ body {
 	font-family: Helvetica;
 }
 
+ul.messages {
+	list-style: none;
+}
+
+li.success {
+	color: green;
+}
+
+li.error {
+	color: red;
+}
+
 #pagewrap {
 	display: block;
 	max-width: 75rem;
@@ -67,4 +79,24 @@ form input[type="text"], form input[type="password"] {
 form span {
 	display: block;
 	font-size: 0.7rem;
+}
+
+.checked {
+    color: orange;
+}
+
+.books {
+	overflow-y: scroll;
+	border: 1px solid black;
+	height: 200px;
+	width: 400px;
+}
+
+.books a {
+	display: block;
+}
+
+a.delete {
+	color: red;
+	float: right;
 }

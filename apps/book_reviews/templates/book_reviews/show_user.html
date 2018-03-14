@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book Reviews</title>
+	{% load static %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'book_reviews/css/style.css' %}">
+</head>
+<body>
+	<div id="pagewrap">
+		<div class="header">
+			<h1>Welcome {{ user.alias }}</h1>
+			<a href="/books">Home</a>
+			<a href="/logout">Logout</a>
+		</div>
+		
+
+			<h2>User Alias: {{ user.alias }}</h2>
+			<p>Name: {{ user.name }}</p>
+			<p>Email: {{ user.email }}</p>
+			<p>Total Reviews: {{ review_count }}</p>
+
+			<h4>Posted Reviews on the following books:</h4>
+			{% for book in reviewed_books %}
+				<p><a href="/books/{{book.0}}">{{ book.1 }}</a></p>
+			{% endfor %}
+			
+	</div>
+		
+</body>
+</html>

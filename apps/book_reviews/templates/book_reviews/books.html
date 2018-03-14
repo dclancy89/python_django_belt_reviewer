@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book Reviews</title>
+	{% load static %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'book_reviews/css/style.css' %}">
+</head>
+<body>
+	<div id="pagewrap">
+		<div class="header">
+			<h1>Welcome {{ user.alias }}</h1>
+			<a href="/books/add">Add Book and Review</a>
+			<a href="/logout">Logout</a>
+		</div>
+		<div class="col-1-2">
+			<hr />
+			<p>Recent Book Reviews:</p>
+			{% for review in recent_reviews %}
+				<p><a href="/books/{{ review.book.id }}">{{ review.book.title }}</a></p>
+				<p>Rating: 
+					<script>
+						for(var i = 0; i < {{ review.rating }}; i++) {
+							document.write('<span class="fa fa-star checked"></span>');
+						}
+					</script>
+				</p>
+				<p><a href="/users/{{ review.reviewer.id }}">{{ review.reviewer.alias }}</a> says: <em>{{ review.review }}</em></p>
+				<p>Posted on: {{ review.created_at }}</p>
+
+			{% endfor %}
+		</div>
+		<div class="col-1-2">
+			<h4>Other books with reviews</h4>
+			<div class="books">
+				{% for book in books %}
+					<a href="books/{{ book.id }}">{{ book.title }}</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+		
+	</div>
+</body>
+</html>
